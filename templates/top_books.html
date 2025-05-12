@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Top Books</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #333;
+            padding: 15px 0;
+        }
+
+        header ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        header ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        header ul li a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .book-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .book-card {
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 240px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .book-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .book-info {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .book-info h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .book-info p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <ul>
+            <li>
+                <a href="/">Top Books</a>
+            </li>
+            <li>
+                <a href="/recommend_books">recommend_books</a>
+            </li>
+        </ul>
+    </header>
+    <h1>Top Rated Books</h1>
+    <div class="book-container">
+        {% for i in range(book_name|length) %}
+        <div class="book-card">
+            <img src="{{ image[i] }}" alt="Book Image">
+            <div class="book-info">
+                <h3>{{ book_name[i] }}</h3>
+                <p><strong>Author:</strong> {{ author_name[i] }}</p>
+                <p><strong>Publisher:</strong> {{ Publisher_name[i] }}</p>
+                <p><strong>Year:</strong> {{ publish_date[i] }}</p>
+                <p><strong>Votes:</strong> {{ rating[i] }}</p>
+                <p><strong>Avg Rating:</strong> {{ avg_rating[i]|round(2) }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

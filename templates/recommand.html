@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Recommender</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+          
+        header {
+            background-color: #333;
+            padding: 15px 0;
+        }
+
+        header ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        header ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        header ul li a:hover {
+            text-decoration: underline;
+        }
+
+        form input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        form input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .recommendations {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 20px;
+        }
+
+        .book-card {
+            width: 200px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 10px;
+        }
+
+        .book-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .book-card p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <ul>
+            <li>
+                <a href="/">Top Books</a>
+            </li>
+            <li>
+                <a href="/recommend_books">recommend_books</a>
+            </li>
+        </ul>
+    </header>
+
+    <h1>Book Recommender</h1>
+    <form method="POST" action="/recommend_books">
+        <input type="text" name="book_name" placeholder="Enter book name" required>
+        <input type="submit" value="Recommend">
+    </form>
+
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+
+    {% if data %}
+    <h2>Books Similar to "{{ book_name }}"</h2>
+    <div class="recommendations">
+        {% for book in data %}
+        <div class="book-card">
+            <img src="{{ book[3] }}" alt="Book Image">
+            <p><strong>{{ book[0] }}</strong></p>
+            <p>Author: {{ book[1] }}</p>
+            <p>Publisher: {{ book[2] }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</body>
+</html>
